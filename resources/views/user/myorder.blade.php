@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
@@ -182,7 +184,7 @@ background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 
                       <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                       <div class="row d-flex align-items-center">
                         <div class="col-md-4">
-                          <a href="{{route('cancelorder',$item->id)}}" class="btn btn-info">Cancle Order</a>
+                          <a href="{{route('cancelorder',$item->id)}}" class="btn btn-info" onclick="confirmation(event)" >Cancle Order</a>
                         </div>
                         
                       </div>
@@ -203,7 +205,38 @@ background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 
           </div>
         </div>
       </section>
+
+
+      <script>
+        function confirmation(ev)
+        {
+          ev.preventDefault();
+
+          var urltoRedirect=ev.currentTarget.getAttribute('href');
+          console.log(urltoRedirect)
+
+          swal({
+            title:"Are you Sure Want to Cancel?",
+            text:"You Wont Be Able to Revert this Action",
+            icon:"warning",
+            buttons:true,
+            dangerMode:true,
+          })
+
+          .then((willCancel)=>{
+
+            if(willCancel){
+              window.location.href=urltoRedirect;
+            }
+
+          });
+
+        }
+
+
+      </script>
 </body>
+
 </html>
 
 
