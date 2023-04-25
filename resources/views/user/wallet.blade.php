@@ -146,8 +146,9 @@ span{
 
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total Amount  </span>
-                    
-                    <strong>₹{{$showwallet}}
+
+                        
+                    <strong>₹{{ $showwallet ?? " "}}
                         </strong>
                        
                 </li>
