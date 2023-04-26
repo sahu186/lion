@@ -84,7 +84,28 @@ class UserController extends Controller
             'phone' => 'required|min:10',
             'address' => 'required',
             'zipcode' => 'required',
+            
         ]);
+
+        // Get the ZIP code from the form submission
+        $zipcode = $request->input('zipcode');
+
+        // Make an HTTP request to the Postal PIN Code API
+        $response = file_get_contents('https://api.postalpincode.in/pincode/' . $zipcode);
+
+        // Parse the JSON response into an associative array
+        $result = json_decode($response, true);
+
+        // Check if the request was successful
+        if ($result[0]['Status'] == 'Success') {
+            // Get the city, state, and country from the response
+            $city = $result[0]['PostOffice'][0]['District'];
+            $state = $result[0]['PostOffice'][0]['State'];
+            $country = $result[0]['PostOffice'][0]['Country'];
+
+            // Set the values in the request object for use in the view
+            $request->merge(compact('city', 'state', 'country'));
+        }
 
         // Calculate the total price of the order
         $totalPrice = 0;
@@ -119,6 +140,9 @@ class UserController extends Controller
         $order->phone = $validate['phone'];
         $order->address = $validate['address'];
         $order->zipcode = $validate['zipcode'];
+        $order->city =$request->city;
+        $order->state = $request->state;
+        $order->country = $request->country;
         $order->total_price = $totalPrice;
         $order->cash_on_delivery = true;
         $order->save();
@@ -211,4 +235,7 @@ class UserController extends Controller
     
         return redirect()->back()->with('message', 'Order cancelled successfully. Amount has been added back to your wallet.');
     }
+
+
+    
 }
