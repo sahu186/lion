@@ -17,13 +17,16 @@
 
                        
 
-                      <a class="nav-item nav-link" href="{{route('showcontactus')}}">Contact</a>
+                      
                        
                        
                        
                        <a class="nav-item nav-link" href="{{route('showcart')}}">
                         <i class="fas fa-shopping-cart"></i>
                         Cart[{{$cartCount}}]</a>
+
+                        <a class="nav-item nav-link" href="#"><i class='fas fa-map-marker-alt'></i>
+                        {{$location->regionName}}, {{$location->countryName}}</a>
 
                         <div class="dropdown navbar-nav  collapse navbar-collapse" id="navbarNavAltMarkup">
                             <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +38,7 @@
                                 Wallet</a>
                               <a class="dropdown-item" href="{{route('myorder')}}"><i class='fas fa-shopping-bag'></i> My Orders</a>
                               <a class="dropdown-item" href="{{route('about')}}"><i class="fa fa-address-card"></i> About</a>
-                              
+                              <a class="dropdown-item" href="{{route('showcontactus')}}"><i class="fa fa-address-card"></i> Contact</a>
                             </div>
                           </div>
                         
@@ -83,7 +86,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="banner_taital">
-                        <h1 class="banner_text">New Running Shoes </h1>
+                        <h1 class="banner_text">New Brand Clothes </h1>
                         <h1 class="mens_text"><strong>Men's Like Plex</strong></h1>
                         <p class="lorem_text">ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <button class="buy_bt">Buy Now</button>

@@ -2,12 +2,67 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  
+
+
+<!-- new collection section start -->
+<div class="layout_padding collection_section">
+    <div class="container">
+        <h1 class="new_text"><strong>New  Collection</strong></h1>
+        <p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+        @foreach ($data as $data)
+            
+        
+        <div class="collection_section_2">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about-img" style="height:450px;width:450px">
+                        <button class="new_bt">New</button>
+                        <div class="shoes-img"><img src="/productimages/{{$data->image}}" style="height:300px;width:300px;  margin-left: 70px;" ></div>
+                       
+                    </div>
+                    <button class="seemore_bt"><a href="#newarrival">See More</a></button>
+                </div>
+                <div class="col-md-6" >
+                    <div class="about-img2" style="height:450px;width:450px">
+                        <div class="shoes-img2" style="font-size: 20px">{{$data->description}}</div>
+                        <p class="sport_text" style="font-weight: 600">{{$data->productname}}</p>
+                        <div class="dolar_text mt-2">₹<strong style="color: #f12a47;">{{$data->price}}</strong> </div>
+                        <div class="star_icon  " style="margin-left: 180px">
+                            <ul>
+                                <li><a href="#"><img src="user/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="user/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="user/images/star-icon.png"></a></li>
+                                <li><a href="#"><img src="user/images/star-icon.png"></a></li>
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+
 
 <div class="collection_section layout_padding">
     <div class="container">
-        <h1 class="new_text"><strong>New Arrivals Products</strong></h1>
+        <h1 class="new_text" id="newarrival"><strong>New Arrivals Products</strong></h1>
         <p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+
+        <form action="">
+            @csrf
+
+            <div class="form-group">
+              
+              <input type="search" name="search" id="" class=" text-center" placeholder="Search Product"  style="width: 200px; " value="{{$search}}">
+              <button class="btn btn-primary">Search</button>
+              
+            </div>
+    
+        </form>
     </div>
 </div>
 <!-- New Arrivals Products -->

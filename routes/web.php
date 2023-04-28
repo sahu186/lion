@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 Route::get('/',[UserController::class,'index'])->name('home');
 Route::get('aboutus',[UserController::class,'about'])->name('about');
 Route::middleware('auth')->group(function(){
+
     Route::post('addcart/{id}',[UserController::class,'addcart'])->name('addcart');
     Route::get('showcart',[UserController::class,'showcart'])->name('showcart');
     Route::post('/update/{id}',[UserController::class,'update'])->name('showcart.update');
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function(){
     Route::post('addwallet',[UserController::class,'addwallet'])->name('addwallet');
     Route::get('myorder',[UserController::class,'myorder'])->name('myorder');
     Route::get('cancelorder/{id}',[UserController::class,'cancelorder'])->name('cancelorder');
+    
+
            
 
 });

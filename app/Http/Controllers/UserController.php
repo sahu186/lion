@@ -13,12 +13,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use Stevebauman\Location\Facades\Location;
+
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::paginate(6);
-        return view('user.home', compact('product'));
+        $search=$request['search'] ?? "";
+        if($search!=""){
+            $product=Product::where('name','LIKE',"%$search%")->paginate(6);
+
+        }else{
+            
+            $product = Product::paginate(6);
+        }
+     
+
+
+        $data = Product::orderBy('created_at', 'desc')->take(2)->get();
+
+        $ip = '110.226.25.185'; //For static IP address get
+        //$ip = request()->ip(); //Dynamic IP address get
+        $location = Location::get($ip); 
+        return view('user.home', compact('product','data' ,'location','search'));
     }
     public function addcart(Request $request, $id)
     {
@@ -53,9 +70,11 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $cart = Cart::where('email', $user->email)->get();
+        $ip = '110.226.25.185'; //For static IP address get
+        //$ip = request()->ip(); //Dynamic IP address get
+        $location = Location::get($ip); 
 
-
-        return view('user.showcart', compact('cart'));
+        return view('user.showcart', compact('cart','location'));
     }
 
     public function deletecart($id)
@@ -168,7 +187,10 @@ class UserController extends Controller
 
     public function showcontactus()
     {
-        return view('user.contact');
+        $ip = '110.226.25.185'; //For static IP address get
+        //$ip = request()->ip(); //Dynamic IP address get
+        $location = Location::get($ip); 
+        return view('user.contact', compact('location'));
     }
 
     public function contactus(Request $request)
@@ -235,6 +257,8 @@ class UserController extends Controller
     
         return redirect()->back()->with('message', 'Order cancelled successfully. Amount has been added back to your wallet.');
     }
+
+    
 
 
     
